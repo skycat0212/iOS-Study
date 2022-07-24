@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B658985288ABD9B00B9A091 /* PlaceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B658984288ABD9B00B9A091 /* PlaceInformation.swift */; };
 		0B6B2FB0288653520093714C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6B2FAF288653520093714C /* AppDelegate.swift */; };
 		0B6B2FB2288653520093714C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6B2FB1288653520093714C /* SceneDelegate.swift */; };
 		0B6B2FB4288653520093714C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6B2FB3288653520093714C /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B658984288ABD9B00B9A091 /* PlaceInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceInformation.swift; sourceTree = "<group>"; };
 		0B6B2FAC288653520093714C /* MakKitStudy220719.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakKitStudy220719.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6B2FAF288653520093714C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B6B2FB1288653520093714C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B658983288ABD6E00B9A091 /* PlaceInformation */ = {
+			isa = PBXGroup;
+			children = (
+				0B658984288ABD9B00B9A091 /* PlaceInformation.swift */,
+			);
+			path = PlaceInformation;
+			sourceTree = "<group>";
+		};
 		0B6B2FA3288653520093714C = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		0B6B2FAE288653520093714C /* MakKitStudy220719 */ = {
 			isa = PBXGroup;
 			children = (
+				0B658983288ABD6E00B9A091 /* PlaceInformation */,
 				0B91F280288AB58A00C823EB /* StaticCoordinates.swift */,
 				0B6B2FB3288653520093714C /* ViewController.swift */,
 				0B91F276288AB42500C823EB /* MarkerView */,
@@ -301,6 +312,7 @@
 			files = (
 				0B6B2FB4288653520093714C /* ViewController.swift in Sources */,
 				0B6B2FB0288653520093714C /* AppDelegate.swift in Sources */,
+				0B658985288ABD9B00B9A091 /* PlaceInformation.swift in Sources */,
 				0B91F27A288AB47600C823EB /* MarkerView.swift in Sources */,
 				0B6B2FB2288653520093714C /* SceneDelegate.swift in Sources */,
 				0B91F281288AB58A00C823EB /* StaticCoordinates.swift in Sources */,

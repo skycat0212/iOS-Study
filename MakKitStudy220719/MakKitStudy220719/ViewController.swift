@@ -14,71 +14,62 @@ class ViewController: UIViewController {
     @IBOutlet weak var yellowButton: UIButton!
     @IBOutlet weak var greenButton: UIButton!
     
-    let jejuKakao = PlaceObject(company: .kakao,
+    let jejuKakao = CompanyInformation(company: .kakao,
                                 coordinate: kakaoJejuCoordinate)
-    let secondNaver = PlaceObject(company: .naver,
+    let secondNaver = CompanyInformation(company: .naver,
                                   coordinate: naverSecondCoordinate)
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        setMapView()
+    }
+    
+    func setMapView() {
         mapView.delegate = self
-        mapView.register(KakaoMarkerView.self, forAnnotationViewWithReuseIdentifier: KakaoMarkerView.identifier)
-        mapView.register(NaverMarkerView.self, forAnnotationViewWithReuseIdentifier: NaverMarkerView.identifier)
-        
+        mapView.register(CompanyMarkerView.self, forAnnotationViewWithReuseIdentifier: CompanyMarkerView.reuseIdentifier)
     }
     
     @IBAction func yellowButtonClicked(_ sender: Any) {
         yellowButton.isSelected = !yellowButton.isSelected
-        
-        if yellowButton.isSelected {
-            showKakao()
-        } else {
-            hideKakao()
-        }
+        setKakaoMarkerStatus(isHidden: !yellowButton.isSelected)
     }
     
     @IBAction func greenButtonClicked(_ sender: Any) {
         greenButton.isSelected = !greenButton.isSelected
-        
-        if greenButton.isSelected {
-            showNaver()
+        setNaverMarkerStatus(isHidden: !greenButton.isSelected)
+    }
+    
+    func setKakaoMarkerStatus(isHidden: Bool) {
+        if !isHidden {
+            mapView.addAnnotation(jejuKakao)
         } else {
-            hideNaver()
+            mapView.removeAnnotation(jejuKakao)
         }
     }
     
-    func showKakao() {
-        mapView.addAnnotation(jejuKakao)
+    func setNaverMarkerStatus(isHidden: Bool) {
+        if !isHidden {
+            mapView.addAnnotation(secondNaver)
+        } else {
+            mapView.removeAnnotation(secondNaver)
+        }
     }
-    
-    func hideKakao() {
-        mapView.removeAnnotation(jejuKakao)
-    }
-    
-    func showNaver() {
-        mapView.addAnnotation(secondNaver)
-    }
-    
-    func hideNaver() {
-        mapView.removeAnnotation(secondNaver)
-    }
+
     
 }
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? PlaceObject else { return nil }
-        
-        let annotationView: MKAnnotationView
-        
-        switch annotation.company {
-        case .kakao:
-            annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: KakaoMarkerView.identifier) ?? MKAnnotationView()
-        case .naver:
-            annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: NaverMarkerView.identifier) ?? MKAnnotationView()
+        guard let annotation = annotation as? CompanyInformation else {
+            print("mapkit delegate ConpanyInformation casting error")
+            return nil
         }
+        
+        guard let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CompanyMarkerView.reuseIdentifier) as? CompanyMarkerView else {
+            print("mapkit delegate ConpanyMarkerView casting error")
+            return nil
+        }
+        annotationView.companyInfo = annotation
         
         return annotationView
     }
@@ -86,15 +77,3 @@ extension ViewController: MKMapViewDelegate {
 
 
 
-
-class PlaceObject: NSObject, MKAnnotation {
-    let coordinate: CLLocationCoordinate2D
-    let company: Company
-    
-    init(company: Company, coordinate: CLLocationCoordinate2D) {
-        self.company = company
-        self.coordinate = coordinate
-        
-        super.init()
-    }
-}
